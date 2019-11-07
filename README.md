@@ -1,4 +1,4 @@
-# gakki 111
+# gakki 
 
 > A Vue.js project
 
