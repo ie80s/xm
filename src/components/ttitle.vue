@@ -67,7 +67,11 @@ export default {
   a{
     text-decoration: none;
   }
-  .left{
-    width: 30%;
+  .left .right{
+    width: 35%;
+  }
+  .middle{
+      display: flex;
+      flex-direction: row;
   }
 </style>
