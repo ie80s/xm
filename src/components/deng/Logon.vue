@@ -124,7 +124,7 @@ export default {
         if (valid) {
           setTimeout(() => {
             alert('注册成功')
-            this.$router.push('index')
+            this.$router.push('/')
           }, 400); 
         } else {
           console.log("error submit!!");
@@ -135,7 +135,7 @@ export default {
     // <!--进入登录页-->
     gotoLogin() {
       this.$router.push({
-        path: "/logoin"
+        path: "/deng/logoin"
       });
     },
     // 验证手机号
