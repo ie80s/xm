@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import logoin from '@/components/logoin'
+import logoin from '@/components/deng/logoin'
 import index from '@/components/index'
-import Logon from  '@/components/Logon'
+import Logon from  '@/components/deng/Logon'
 
 Vue.use(Router)
 
@@ -14,12 +14,12 @@ export default new Router({
       component: index
     },
     {
-      path:'/logoin',
+      path:'/deng/logoin',
       name:'logoin',
       component: logoin
     },
     {
-      path:'/Logon',
+      path:'/deng/Logon',
       name:'Logon',
       component: Logon
     }
