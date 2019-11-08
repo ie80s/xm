@@ -54,9 +54,9 @@ export default {
 <style scoped>
   .el-menu{
     width: 100%;
-    /* display: flex;
+    display: flex;
     flex-direction: row;
-    justify-content: space-between */
+    justify-content: space-between
   }
   .el-menu-title{
     margin-top: 0;
@@ -67,11 +67,15 @@ export default {
   a{
     text-decoration: none;
   }
-  .left .right{
-    width: 35%;
-  }
   .middle{
-      display: flex;
-      flex-direction: row;
+    display: inline-flex;
+    flex-direction: row;
   }
+  /* .left, .right{
+    width:30%;
+    margin: 0;
+  }
+  .middle a{
+      width:11%;
+  } */
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div id = "app">
-        <htitle></htitle>
+        <ttitle></ttitle>
         <div class = 'hhead'>
             <el-select v-model="value" placeholder="请选择">
                 <el-option
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import htitle from '@/components/htitle'
+import ttitle from '@/components/ttitle'
 export default {
     data(){
         return{
@@ -115,7 +115,7 @@ export default {
         }
     },
     components: {
-        htitle
+        ttitle
   },
 }
 </script>
