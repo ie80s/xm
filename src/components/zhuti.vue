@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <el-form ref="form" :model="form" label-width="80px" label-position="left">
+        <el-form ref="form" :model="form" label-width="10%" label-position="left">
             <el-form-item label="故障区域">
                 <el-select v-model="form.region" placeholder="请选择故障区域">
                     <el-option label="区域一" value="shanghai"></el-option>
@@ -8,17 +8,18 @@
                 </el-select>
             </el-form-item>
             <el-form-item label="故障地址">
-                <el-input v-model="form.address"></el-input>
+                <el-input v-model="form.address" placeholder="请输入详细的故障地址，如门牌号等"></el-input>
             </el-form-item>
             <el-form-item label="维修项目">
                  <el-cascader
                     v-model="form.project"
                     :options="options"
                     :props="{ expandTrigger: 'hover' }"
-                    @change="handleChange"></el-cascader>
+                    @change="handleChange"
+                    placeholder="请选择维修项目"></el-cascader>
             </el-form-item>
             <el-form-item label="故障描述">
-                <el-input type="textarea" v-model="form.desc" placeholder="请详细填写故障描述，字数控制在6~300字之间"></el-input>
+                <el-input type="textarea" v-model="form.desc" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请详细填写故障描述，字数控制在6~300字之间"></el-input>
             </el-form-item>
             <el-form-item label="故障图片">
                 <el-upload
@@ -33,7 +34,7 @@
                 </el-dialog>
             </el-form-item>
             <el-form-item label="联系电话">
-                <el-input v-model="form.tel"></el-input>
+                <el-input v-model="form.tel" placeholder="请输入电话号码"></el-input>
             </el-form-item>
             <el-form-item label="无人维修">
                 <el-radio-group v-model="form.noman">
@@ -276,6 +277,31 @@ export default {
 }
 </script>
 
-<style lang="sass">
-    
+<style>
+    #app{
+        width: 100%;
+    }
+    form{
+        margin-left: 20%;
+        width:60%;
+        border: 1px solid black;
+    }
+    .el-input, .el-select, .el-cascader{
+        width:50%;
+        float: left;
+    }
+     .el-upload{
+         float: left;
+     }
+    .el-radio-group{
+        margin-top: 1%;
+        float: left;
+    }
+    .el-textarea{
+        width: 50%;
+        float: left;
+    }
+    .el-form-item__label{
+        padding-left: 2%;
+    }
 </style>

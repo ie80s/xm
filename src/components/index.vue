@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import ttitle from '@/components/ttitle'
+import ttitle from '@/components/common/ttitle'
 export default {
     data(){
         return{
