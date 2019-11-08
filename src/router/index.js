@@ -4,6 +4,7 @@ import logoin from '@/components/logoin'
 import index from '@/components/index'
 import Logon from  '@/components/Logon'
 import ttitle from '@/components/ttitle'
+import zhuti from '@/components/zhuti'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path:'/ttitle',
       name:'ttitle',
       component: ttitle
+    },
+    {
+      path:'/zhuti',
+      name:'zhuti',
+      component: zhuti
     }
   ]
 })
