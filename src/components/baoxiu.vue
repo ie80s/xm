@@ -1,15 +1,19 @@
 <template>
     <div id="app">
-        <el-form ref="form" :model="form" label-width="10%" label-position="left">
+        <ttitle></ttitle>
+        <div class="application">
+            <el-form ref="form" :model="form" label-width="13%" label-position="left">
             <el-form-item label="故障区域">
                 <el-select v-model="form.region" placeholder="请选择故障区域">
                     <el-option label="区域一" value="shanghai"></el-option>
                     <el-option label="区域二" value="beijing"></el-option>
                 </el-select>
             </el-form-item>
+            <br><br>
             <el-form-item label="故障地址">
                 <el-input v-model="form.address" placeholder="请输入详细的故障地址，如门牌号等"></el-input>
             </el-form-item>
+            <br><br>
             <el-form-item label="维修项目">
                  <el-cascader
                     v-model="form.project"
@@ -18,9 +22,11 @@
                     @change="handleChange"
                     placeholder="请选择维修项目"></el-cascader>
             </el-form-item>
+            <br><br>
             <el-form-item label="故障描述">
                 <el-input type="textarea" v-model="form.desc" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请详细填写故障描述，字数控制在6~300字之间"></el-input>
             </el-form-item>
+            <br><br>
             <el-form-item label="故障图片">
                 <el-upload
                     action="https://jsonplaceholder.typicode.com/posts/"
@@ -33,23 +39,31 @@
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
             </el-form-item>
+            <br><br>
             <el-form-item label="联系电话">
                 <el-input v-model="form.tel" placeholder="请输入电话号码"></el-input>
             </el-form-item>
+            <br><br>
             <el-form-item label="无人维修">
                 <el-radio-group v-model="form.noman">
                 <el-radio label="同意"></el-radio>
                 <el-radio label="不同意"></el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="onSubmit">立即提交</el-button>
-            </el-form-item>
+            <br><br>
+            <div class="sub">
+                <el-form-item>
+                    <el-button type="primary" @click="onSubmit">立即提交</el-button>
+                </el-form-item>
+            </div>           
         </el-form>
+        </div>
+        
     </div>
 </template>
 
 <script>
+import ttitle from '@/components/common/ttitle'
 export default {
     data(){
         return{
@@ -256,7 +270,7 @@ export default {
                 }]
             }],
             dialogImageUrl: '',
-            dialogVisible: false,
+            dialogVisible: false
         };
     },
      methods: {
@@ -274,20 +288,25 @@ export default {
         console.log('submit!');
       }
     },
+    components: {
+        ttitle
+    },
 }
 </script>
 
 <style>
     #app{
         width: 100%;
+        background-color: rgba(0, 0, 0, 0.1)
     }
     form{
         margin-left: 20%;
         width:60%;
         border: 1px solid black;
+        background-color: white
     }
     .el-input, .el-select, .el-cascader{
-        width:50%;
+        width:57%;
         float: left;
     }
      .el-upload{
@@ -301,7 +320,17 @@ export default {
         width: 50%;
         float: left;
     }
-    .el-form-item__label{
-        padding-left: 2%;
+    /* .el-form-item__label{
+        width: 15%;
+    } */
+    /* .application{
+        margin-top: 2%;
+    } */
+    .el-form-item{
+        margin-left: 20%;
+    }
+    .sub{
+        position: relative;
+        left: -25%;
     }
 </style>
