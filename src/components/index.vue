@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import htitle from '@/components/htitle'
+import htitle from '@/components/module/htitle'
 export default {
     data(){
         return{
