@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="page">
         <ttitle></ttitle>
         <div class="application">
             <el-form ref="form" :model="form" label-width="13%" label-position="left">
@@ -295,7 +295,7 @@ export default {
 </script>
 
 <style>
-    #app{
+    #page{
         width: 100%;
         background-color: rgba(0, 0, 0, 0.1)
     }
