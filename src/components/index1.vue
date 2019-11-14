@@ -27,6 +27,13 @@
             </el-select>
            </div>
       </div>
+      <div class="footer">
+        <span>【每页显示 x 条，这是第 x 页， 共 x 页】</span>
+        <button>首页</button>
+        <button>上一页</button>
+        <button>下一页</button>
+        <button>尾页</button>
+      </div>
   </div>
 </template>
 
@@ -84,6 +91,7 @@ export default {
 <style lang="scss">
     .page{
         width: 100%;
+        height: 100%;
             .top{
                 display: flex;
                 flex-direction: row;
@@ -100,6 +108,14 @@ export default {
                     .type1,.type2{
                         width: 25%;
                     }
+            }
+            .footer{
+              margin-top: 40%;
+              margin-right: 39%;
+                button{
+                  width: 5%;
+                  margin-left: 3%;
+                }
             }
     }
     
