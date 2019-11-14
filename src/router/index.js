@@ -5,7 +5,6 @@ import index from '@/components/index'
 import Logon from  '@/components/Logon'
 import baoxiu from '@/components/baoxiu'
 import index1 from '@/components/index1'
-import gonggao from '@/components/common/gonggao'
 
 Vue.use(Router)
 
@@ -35,11 +34,6 @@ export default new Router({
       path: '/index1',
       name: 'index1',
       component: index1
-    },
-    {
-      path: '/gonggao',
-      name: 'gonggao',
-      component: gonggao
     },
   ]
 })

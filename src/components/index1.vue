@@ -27,6 +27,7 @@
             </el-select>
            </div>
       </div>
+      <order></order>
       <div class="footer">
         <span>【每页显示 x 条，这是第 x 页， 共 x 页】</span>
         <button>首页</button>
@@ -39,9 +40,10 @@
 
 <script>
 import ttitle from '@/components/common/ttitle'
+import order from '@/components/common/order'
 export default {
   components: {
-      ttitle
+      ttitle,order
   },
   props: {
 
