@@ -69,6 +69,7 @@
                 </div>
             </div>
             <hr size="2px" noshade="true"> 
+            <condition></condition>
         </div>
         
     </div>
@@ -78,8 +79,18 @@
 
 
 <script>
+import condition from '@/components/module/condition'
+
+
 export default {
-    
+    data(){
+        return{
+            
+        };
+    },
+    components: {
+        condition
+    }
 }
 
 
