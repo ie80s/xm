@@ -149,6 +149,12 @@ export default {
     }
   }
 };
+
+import axios from "axios";
+import qs from 'Qs';
+import logoinVue from './logoin.vue'
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://47.94.10.228';
 </script>
 
 <style scoped lang="scss">
