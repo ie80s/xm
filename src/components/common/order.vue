@@ -33,7 +33,8 @@ export default {
         date:'2019-10-10 18:25',
         status:'已受理',
         describe:'这是一段描述文字。。。。。。',
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        fit:'fill'
     }
   },
   computed: {
@@ -56,10 +57,11 @@ export default {
 
 <style lang="scss">
     .order{
-        border: 1px solid black;
+        border: 1px solid rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction:column;
-        width: 50%;
+        width: 84%;
+        margin-top: 2%;
             .order-top{
                 display: flex;
                 flex-direction: row;

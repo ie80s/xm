@@ -6,9 +6,9 @@
           <el-menu-item index="1" disabled>在线报修系统</el-menu-item>
         </div>
         <div class = 'middle'>
-           <el-menu-item index="2"><router-link to="index.vue">首页</router-link></el-menu-item>
+           <el-menu-item index="2"><router-link to="index1">首页</router-link></el-menu-item>
            <el-menu-item index="3"><router-link to="baoxiu">我要报修</router-link></el-menu-item>
-           <el-menu-item index="4"><router-link to="index.vue">我的报修</router-link></el-menu-item>
+           <el-menu-item index="4"><router-link to="index1">我的报修</router-link></el-menu-item>
         </div>
         <div class="right">
             <el-menu-item index="5"><router-link to="logoin.vue">登录</router-link></el-menu-item>

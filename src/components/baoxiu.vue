@@ -29,6 +29,7 @@
             <br><br>
             <el-form-item label="故障图片">
                 <el-upload
+                    accept="image/jpg,image/png"
                     action="https://jsonplaceholder.typicode.com/posts/"
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"

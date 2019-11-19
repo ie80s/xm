@@ -27,13 +27,23 @@
             </el-select>
            </div>
       </div>
-      <order></order>
+      <div class="bottom">
+        <order></order>
+        <order></order>
+        <order></order>
+        <order></order>
+        <order></order>
+      </div>
       <div class="footer">
-        <span>【每页显示 x 条，这是第 x 页， 共 x 页】</span>
-        <button>首页</button>
-        <button>上一页</button>
-        <button>下一页</button>
-        <button>尾页</button>
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400">
+        </el-pagination>
       </div>
   </div>
 </template>
@@ -51,6 +61,7 @@ export default {
   data() {
     return {
         keywords:'',
+        currentPage:4,
         options: [{
           value: '选项1',
           label: '黄金糕'
@@ -85,6 +96,12 @@ export default {
   methods: {
       handleClick() {
         alert('button click');
+      },
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
       }
   }
 }
@@ -97,9 +114,9 @@ export default {
             .top{
                 display: flex;
                 flex-direction: row;
-                margin-left: 5%;
+                margin-left: 10%;
                 margin-top: 2%;
-                width: 60%;
+                width: 50%;                
                     .search{
                         width: 40%;
                         float: left;
@@ -111,13 +128,20 @@ export default {
                         width: 25%;
                     }
             }
-            .footer{
-              margin-top: 40%;
-              margin-right: 39%;
-                button{
-                  width: 5%;
-                  margin-left: 3%;
+            .footer{              
+              margin-top: 4%;
+              margin-left: 8%;
+              width: 50%;
+                .el-pagination{
+                  margin-left: -18%;
                 }
+            }
+            .bottom{              
+              width: 50%;
+              margin-top: 1%;
+              display: flex;
+              flex-direction: column;
+              margin-left: 14%;
             }
     }
     
