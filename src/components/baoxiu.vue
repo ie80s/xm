@@ -11,12 +11,12 @@
             </el-form-item>
             <br><br>
             <el-form-item label="故障地址">
-                <el-input v-model="form.address" placeholder="请输入详细的故障地址，如门牌号等"></el-input>
+                <el-input v-model="form.radr" placeholder="请输入详细的故障地址，如门牌号等"></el-input>
             </el-form-item>
             <br><br>
             <el-form-item label="维修项目">
                  <el-cascader
-                    v-model="form.project"
+                    v-model="form.rtype"
                     :options="options"
                     :props="{ expandTrigger: 'hover' }"
                     @change="handleChange"
@@ -24,16 +24,17 @@
             </el-form-item>
             <br><br>
             <el-form-item label="故障描述">
-                <el-input type="textarea" v-model="form.desc" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请详细填写故障描述，字数控制在6~300字之间"></el-input>
+                <el-input type="textarea" v-model="form.rdes" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请详细填写故障描述，字数控制在6~300字之间"></el-input>
             </el-form-item>
             <br><br>
             <el-form-item label="故障图片">
                 <el-upload
                     accept="image/jpg,image/png"
-                    action="https://jsonplaceholder.typicode.com/posts/"
+                    action="http:106.12.189.19/record/insertTo"
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove">
+                    :on-remove="handleRemove"
+                    :data="upData">
                     <i class="el-icon-plus"></i>
                 </el-upload>
                 <el-dialog :visible.sync="dialogVisible">
@@ -54,7 +55,7 @@
             <br><br>
             <div class="sub">
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit">立即提交</el-button>
+                    <el-button type="primary" @click="onSubmit(form)">立即提交</el-button>
                 </el-form-item>
             </div>           
         </el-form>
@@ -65,15 +66,19 @@
 
 <script>
 import ttitle from '@/components/common/ttitle'
+import { async } from 'q';
 export default {
     data(){
         return{
             form:{
+                ruid:'012702505248',
                 region:'',
-                address:'',
-                project:'',
-                desc:'',
-                tel:'',
+                radr:'asd',
+                rtype:'asd',
+                rdes:'asd',
+                tel:'11111111111',
+                rdate:'',
+                wstatic:'待维修',
             },
              options: [{
                 value: 'zhinan',
@@ -269,7 +274,7 @@ export default {
                     value: 'jiaohu',
                     label: '组件交互文档'
                 }]
-            }],
+            }],           
             dialogImageUrl: '',
             dialogVisible: false
         };
@@ -285,13 +290,41 @@ export default {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
         },
-        onSubmit() {
-        console.log('submit!');
-      }
+        onSubmit(form) {
+        this.$refs[form].validate(async valid => {
+            if(valid){
+                this.$refs.upload.submit()
+            }else{
+                return false
+            }
+        })
+      },
+      getTime(){
+          var _this = this;
+          let year = new Date().getFullYear();
+          let month = new Date().getMonth() + 1;
+          let day = new Date().getDate();
+          let hour = new Date().getHours();
+          let min = new Date().getMinutes() < 10? '0'+new Date().getMinutes() : new Date().getMinutes();
+          _this.form.rdate = year + '-' + month + '-' + day + '  ' + hour + ':' + min;
+      },
+      currentTime(){
+            setInterval(this.getTime,500)
+        },
     },
     components: {
         ttitle
     },
+    created(){
+        this.currentTime();
+    },
+    computed:{
+        upData(){
+            return{
+                body: this.form 
+            }
+        }
+    }
 }
 </script>
 
