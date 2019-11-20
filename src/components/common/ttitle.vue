@@ -7,11 +7,11 @@
         </div>
         <div class = 'middle'>
            <el-menu-item index="2"><router-link to="index.vue">首页</router-link></el-menu-item>
-           <el-menu-item index="3"><router-link to="index.vue">我要报修</router-link></el-menu-item>
+           <el-menu-item index="3"><router-link to="baoxiu">我要报修</router-link></el-menu-item>
            <el-menu-item index="4"><router-link to="index.vue">我的报修</router-link></el-menu-item>
         </div>
         <div class="right">
-            <el-menu-item index="5"><router-link to="index.vue">登录</router-link></el-menu-item>
+            <el-menu-item index="5"><router-link to="logoin.vue">登录</router-link></el-menu-item>
         </div>
     </el-menu>
   </div>
@@ -54,9 +54,9 @@ export default {
 <style scoped>
   .el-menu{
     width: 100%;
-    /* display: flex;
+    display: flex;
     flex-direction: row;
-    justify-content: space-between */
+    justify-content: space-between
   }
   .el-menu-title{
     margin-top: 0;
@@ -67,8 +67,15 @@ export default {
   a{
     text-decoration: none;
   }
-  .left, .right{
+  .middle{
     display: inline-flex;
     flex-direction: row;
   }
+  /* .left, .right{
+    width:30%;
+    margin: 0;
+  }
+  .middle a{
+      width:11%;
+  } */
 </style>
