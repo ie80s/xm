@@ -50,6 +50,7 @@ export default {
            userLogin:{
                uid:'',
                upsd:''
+               
            } ,
         regUser: {
         // 用户名： 中文、英文、数字，不包括下划线等特殊符号
