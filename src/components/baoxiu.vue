@@ -30,10 +30,12 @@
             <el-form-item label="故障图片">
                 <el-upload
                     accept="image/jpg,image/png"
-                    action="http:106.12.189.19/record/insertTo"
+                    action="106.12.189.19/record/insertTo"
                     list-type="picture-card"
+                    :on-success="imgSucess"
                     :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove"
+                    :on-remove="imgRemove"
+                    :headers="headerMsg"
                     :data="upData">
                     <i class="el-icon-plus"></i>
                 </el-upload>
@@ -70,6 +72,8 @@ import { async } from 'q';
 export default {
     data(){
         return{
+            headerMsg:{Token:'post'},
+            upLoadUrl:'106.12.189.19/record/insertTo',
             form:{
                 ruid:'012702505248',
                 region:'',
@@ -283,7 +287,7 @@ export default {
       handleChange(value) {
         console.log(value);
       },
-      handleRemove(file, fileList) {
+      imgRemove(file, fileList) {
         console.log(file, fileList);
       },
       handlePictureCardPreview(file) {
@@ -291,13 +295,15 @@ export default {
         this.dialogVisible = true;
         },
         onSubmit(form) {
-        this.$refs[form].validate(async valid => {
-            if(valid){
-                this.$refs.upload.submit()
-            }else{
-                return false
-            }
-        })
+        // this.$refs[form].validate(async valid => {
+        //     if(valid){
+        //         this.$refs.upload.submit()
+        //     }else{
+        //         return false
+        //     }
+        // })
+        console.log(this.form)
+        console.log(fileList)
       },
       getTime(){
           var _this = this;
@@ -310,7 +316,12 @@ export default {
       },
       currentTime(){
             setInterval(this.getTime,500)
-        },
+      },
+      imgSucess(res, file, fileList){
+        console.log(res)
+        console.log(file)
+        console.log(fileList)
+      }
     },
     components: {
         ttitle

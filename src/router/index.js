@@ -5,8 +5,11 @@ import index from '@/components/index'
 import Logon from  '@/components/Logon'
 import baoxiu from '@/components/baoxiu'
 import index1 from '@/components/index1'
+import zuoye from '@/components/zuoye'
+import Vuex from 'vuex'
 
 Vue.use(Router)
+Vue.use(Vuex)
 
 export default new Router({
   routes: [
@@ -34,6 +37,11 @@ export default new Router({
       path: '/index1',
       name: 'index1',
       component: index1
+    },
+    {
+      path: '/zuoye',
+      name: 'zuoye',
+      component: zuoye
     },
   ]
 })
