@@ -14,7 +14,7 @@
                             </el-table>                     -->
                             <template>
                                     <el-table 
-                                        v-for="item in repairInfo" :key="item.rid"
+                                        v-for="item in repairInfo.slice(0,1)" :key="item.rid"
                                         :data="repairList"
                                         style="width: 100%"
                                         height="150">
@@ -74,7 +74,7 @@
 
 
 <script>
-import repairs from '@/components/module/repairs'
+
 import axios from "axios";
 import qs from 'Qs';
  export default {
@@ -87,37 +87,24 @@ import qs from 'Qs';
           rdes: '',
           rdata: '',
           radr:'',
-          maintenance:'',
-          introducer:'',
           wstatic: "待维修",
         }],
         repairInfo:[],
       }  
     },
       created(){
-          axios
-      .post("/record/rmess",
+          axios.post("/record/rmess",
       qs.stringify({
         udept: '青岛工学院'
       }))
       .then(res => {
-            this.repairInfo= res.data.list
-            console.log(this.repairInfo)
+        this.repairList.rid=res.data.list.rid
+        this.repairInfo= res.data.list
+        console.log(this.repairInfo)
         })
       },
-    // components:{
-    //     Repairs
-    // }
   }
-    
-
-
 </script>
-
-
-
-
-
 <style scoped lang="scss">
 #m-Acom{
     width: 100%;
