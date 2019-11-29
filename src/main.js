@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import axios from 'axios'
 
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(axios);
@@ -19,6 +20,7 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
 Vue.filter('dateFormat', function (dateStr, pattern = "") {
   let dt = new Date(dateStr)
   let y = dt.getFullYear()

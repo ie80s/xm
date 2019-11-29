@@ -1,92 +1,22 @@
 <template>
     <div id="Condition">
-        <div class="Condition-1">
-            <el-row :gutter="24">
+        <div  class="conrepair" v-for="item in repairInfo.slice(0,3)"
+            :key="item.rid"
+            :data="repairList"
+            style="width: 100%">
+            <el-row>
                 <el-col :span="12">
                     <div class="grid-content bg-purple">
-                        <span class="cond-left">时间：{{times}}</span>
-                        <span class="cond-left">详情：{{details}}</span>
-                        <div class="demo-image__preview">
-                            <el-image 
-                                style="width: 100px; height: 100px"
-                                :src="url" 
-                                :preview-src-list="srcList">
-                            </el-image>
-                        </div>
+                        <span>类型:{{item.rtype}}</span><br>
+                        <span>时间:{{ item.rdate | dateFormat('yyyy-mm-dd') }}</span> 
+                        <div class="img">
+                            <img :src="'http://' + item.image" width="150" height="150" class="img-icon">
+                        </div> 
                     </div>
                 </el-col>
-                <el-col :span="12">
-                    <div class="grid-content bg-purple">
-                        <span class="cond-right">状态：{{state}}</span>
-                    </div>
-                </el-col>
-            </el-row>           
-        </div>
-        <div class="Condition-2">
-            <el-row :gutter="24">
-                <el-col :span="12">
-                    <div class="grid-content bg-purple">
-                        <span class="cond-left">时间：{{times}}</span>
-                        <span class="cond-left">详情：{{details}}</span>
-                        <div class="demo-image__preview">
-                            <el-image 
-                                style="width: 100px; height: 100px"
-                                :src="url" 
-                                :preview-src-list="srcList">
-                            </el-image>
-                        </div>
-                    </div>
-                </el-col>
-                <el-col :span="12">
-                    <div class="grid-content bg-purple">
-                        <span class="cond-right">状态：{{state}}</span>
-                    </div>
-                </el-col>
+                <el-col :span="12" class="col-ws"><div class="grid-content bg-purple-light"><i>状态:{{  item.wstatic }}</i></div></el-col>
             </el-row>
-        </div>
-        <div class="Condition-3">
-            <el-row :gutter="24">
-                <el-col :span="12">
-                    <div class="grid-content bg-purple">
-                        <span class="cond-left">时间：{{times}}</span>
-                        <span class="cond-left">详情：{{details}}</span>
-                        <div class="demo-image__preview">
-                            <el-image 
-                                style="width: 100px; height: 100px"
-                                :src="url" 
-                                :preview-src-list="srcList">
-                            </el-image>
-                        </div>
-                    </div>
-                </el-col>
-                <el-col :span="12">
-                    <div class="grid-content bg-purple">
-                        <span class="cond-right">状态：{{state}}</span>
-                    </div>
-                </el-col>
-            </el-row>
-        </div>
-        <div class="Condition-4">
-            <el-row :gutter="24">
-                <el-col :span="12">
-                    <div class="grid-content bg-purple">
-                        <span class="cond-left">时间：{{times}}</span>
-                        <span class="cond-left">详情：{{details}}</span>
-                        <div class="demo-image__preview">
-                            <el-image 
-                                style="width: 100px; height: 100px"
-                                :src="url" 
-                                :preview-src-list="srcList">
-                            </el-image>
-                        </div>
-                    </div>
-                </el-col>
-                <el-col :span="12">
-                    <div class="grid-content bg-purple">
-                        <span class="cond-right">状态：{{state}}</span>
-                    </div>
-                </el-col>
-            </el-row>
+            
         </div>
         <div class="block">
             <span class="demonstration"></span>
@@ -104,23 +34,49 @@
 
 
 <script>
+
+
+import axios from "axios";
+import qs from 'Qs';
 export default {
     data(){
         return{      
             currentPage3: 1, 
-            url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            repairList:[{
+                rtype: '',
+                rdata: '',
+                wstatic: "待维修", 
+                image:'' ,
+            }] ,
+            repairInfo:[]
         }
 
     },
     methods: {
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+        console.log(`每页 3 条`);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+        console.log(`当前页: 1`);
       }
     },
-}
+    created(){
+          axios
+      .post("/record/rmess",
+      qs.stringify({
+        udept: '青岛工学院'
+      }))
+      .then(res => {
+            this.repairInfo= res.data.list
+            console.log(this.repairInfo)
+            
+        })
+      },
+    // components:{
+    //     Repairs
+    // }
+  }
+
 
 </script>
 
@@ -144,54 +100,32 @@ export default {
     height: 715px;
     display: inline-flex;
     flex-direction: column;
-    .Condition-1{
-        width: 100%;
-        height: 20%;
-        border: 1px solid black;
-        border-right: none;
-        border-left: none;
-       
-    }
-    .Condition-2{
-        width: 100%;
-        height: 20%;
-        border: 1px solid black;
-        margin-top: 2%;
-        border-right: none;
-        border-left: none;
-    }
-    .Condition-3{
-        width: 100%;
-        height: 20%;
-        border: 1px solid black;
-        margin-top: 2%;
-        border-right: none;
-        border-left: none;
-    }
-    .Condition-4{
-        width: 100%;
-        height: 20%;
-        border: 1px solid black;
-        margin-top: 2%;
-        border-right: none;
-        border-left: none;
-    }
+    
     .block{
         margin-top: 2%;
     }
 }
 
-
-
-.el-row {
+.conrepair{
+    border: 1px solid black;
+    height: 40%;
+    border-top-width:0px;
+    border-left-width:0px;
+    border-right-width:0px;
+    }
+ .el-row {
     margin-bottom: 20px;
+    
     &:last-child {
       margin-bottom: 0;
     }
   }
   .el-col {
     border-radius: 4px;
+    display: inline-flex;
+    justify-content: flex-start;
   }
+  
   
   .grid-content {
     border-radius: 4px;
@@ -201,5 +135,8 @@ export default {
     padding: 10px 0;
     background-color: #f9fafc;
   }
-
+  .col-ws{
+    display: inline-flex;
+    justify-content: flex-end;
+  }
 </style>
