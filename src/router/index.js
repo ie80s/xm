@@ -6,6 +6,7 @@ import Logon from  '@/components/Logon'
 import baoxiu from '@/components/baoxiu'
 import index1 from '@/components/index1'
 import zuoye from '@/components/zuoye'
+import upload_test from '@/components/upload_test'
 import Vuex from 'vuex'
 
 Vue.use(Router)
@@ -42,6 +43,11 @@ export default new Router({
       path: '/zuoye',
       name: 'zuoye',
       component: zuoye
+    },
+    {
+      path: '/upload_test',
+      name: 'upload_test',
+      component: upload_test
     },
   ]
 })

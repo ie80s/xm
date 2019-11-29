@@ -28,17 +28,7 @@
             </el-form-item>
             <br><br>
             <el-form-item label="故障图片">
-                <el-upload
-                    accept="image/jpg,image/png"
-                    action="106.12.189.19/record/insertTo"
-                    list-type="picture-card"
-                    :on-success="imgSucess"
-                    :on-preview="handlePictureCardPreview"
-                    :on-remove="imgRemove"
-                    :headers="headerMsg"
-                    :data="upData">
-                    <i class="el-icon-plus"></i>
-                </el-upload>
+                <input type='file' @change = "getFile($event)">
                 <el-dialog :visible.sync="dialogVisible">
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
@@ -67,12 +57,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 import ttitle from '@/components/common/ttitle'
 import { async } from 'q';
 export default {
     data(){
         return{
-            headerMsg:{Token:'post'},
             upLoadUrl:'106.12.189.19/record/insertTo',
             form:{
                 ruid:'012702505248',
@@ -81,7 +71,7 @@ export default {
                 rtype:'asd',
                 rdes:'asd',
                 tel:'11111111111',
-                rdate:'',
+                rdate:'2010/10/10',
                 wstatic:'待维修',
             },
              options: [{
@@ -284,26 +274,33 @@ export default {
         };
     },
      methods: {
+      getFile(event){
+          this.file = event.target.files[0];
+          console.log(this.file)
+      },
       handleChange(value) {
         console.log(value);
       },
-      imgRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-        },
         onSubmit(form) {
-        // this.$refs[form].validate(async valid => {
-        //     if(valid){
-        //         this.$refs.upload.submit()
-        //     }else{
-        //         return false
-        //     }
-        // })
-        console.log(this.form)
-        console.log(fileList)
+            let formData = new FormData()
+            formData.append('ruid',this.form.ruid)
+            formData.append('rdate',this.form.rdate)
+            formData.append('radr',this.form.radr)
+            formData.append('rtype',this.form.rtype)
+            formData.append('wstatic',this.form.wstatic)
+            formData.append('rdes',this.form.rdes)
+            formData.append("image",this.file)
+            let config = {
+                headers:{
+                   "Content-Type": "multipart/form-data"
+                }
+            }
+            axios.post("/record/insertTo", formData, config).then(res => {
+                if (res.status === 200) {
+                    console.log(res);
+                    console.log(formData)
+                }
+            })
       },
       getTime(){
           var _this = this;
@@ -312,7 +309,7 @@ export default {
           let day = new Date().getDate();
           let hour = new Date().getHours();
           let min = new Date().getMinutes() < 10? '0'+new Date().getMinutes() : new Date().getMinutes();
-          _this.form.rdate = year + '-' + month + '-' + day + '  ' + hour + ':' + min;
+          _this.form.rdate = year + '/' + month + '/' + day;
       },
       currentTime(){
             setInterval(this.getTime,500)
@@ -333,6 +330,11 @@ export default {
         upData(){
             return{
                 body: this.form 
+            }
+        },
+        headerMsg(){
+            return{
+                 "authToken":window.sessionStorage.getItem('authToken')
             }
         }
     }
