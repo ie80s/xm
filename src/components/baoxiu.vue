@@ -63,10 +63,11 @@ import { async } from 'q';
 export default {
     data(){
         return{
-            upLoadUrl:'106.12.189.19/record/insertTo',
+            upLoadUrl:'47.94.10.228/record/insertTo',
             form:{
-                ruid:'012702505248',
+                ruid:'xxbb',
                 region:'',
+                udept:'青岛工学院',
                 radr:'asd',
                 rtype:'asd',
                 rdes:'asd',
@@ -290,15 +291,15 @@ export default {
             formData.append('wstatic',this.form.wstatic)
             formData.append('rdes',this.form.rdes)
             formData.append("image",this.file)
+            formData.append("udept",this.form.udept)
             let config = {
                 headers:{
                    "Content-Type": "multipart/form-data"
                 }
             }
-            axios.post("/record/insertTo", formData, config).then(res => {
+            axios.post("http://47.94.10.228/record/insertTo", formData, config).then(res => {
                 if (res.status === 200) {
                     console.log(res);
-                    console.log(formData)
                 }
             })
       },
@@ -309,7 +310,7 @@ export default {
           let day = new Date().getDate();
           let hour = new Date().getHours();
           let min = new Date().getMinutes() < 10? '0'+new Date().getMinutes() : new Date().getMinutes();
-          _this.form.rdate = year + '/' + month + '/' + day;
+          _this.form.rdate = year + '-' + month + '-' + day;
       },
       currentTime(){
             setInterval(this.getTime,500)
@@ -324,7 +325,7 @@ export default {
         ttitle
     },
     created(){
-        this.currentTime();
+        this.currentTime(); 
     },
     computed:{
         upData(){

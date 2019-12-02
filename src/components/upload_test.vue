@@ -31,6 +31,7 @@ export default {
             }
             axios.post("/record/insertTo", formData, config).then(res => {
                 console.log(formData)
+                console.log(res)
             });
         },
         getFile(event){

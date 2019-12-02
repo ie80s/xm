@@ -42,7 +42,6 @@
 import axios from "axios";
 import qs from 'Qs';
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://47.94.10.228';
 export default {
 
     data(){
