@@ -28,11 +28,30 @@
            </div>
       </div>
       <div class="bottom">
-        <order></order>
-        <order></order>
-        <order></order>
-        <order></order>
-        <order></order>
+        <div class="bottom-left">
+          <order></order>
+          <order></order>
+          <order></order>
+          <order></order>
+          <order></order>
+        </div>
+        <div class="bottom-right">
+          <div class="gonggao1">
+            <h2>公告</h2>
+            <p>asdasdaafasfasfasafafsaf</p>
+          </div>
+          <br>
+          <div class="gonggao2">
+            <h2>公告</h2>
+            <p>asdasdaafasfasfasafafsaf</p>
+          </div>
+          <br>
+          <div class="gonggao3">
+            <h2>公告</h2>
+            <p>asdasdaafasfasfasafafsaf</p>
+          </div>
+          <br>
+        </div>
       </div>
       <div class="footer">
         <el-pagination
@@ -137,11 +156,36 @@ export default {
                 }
             }
             .bottom{              
-              width: 50%;
+              width: 100%;
               margin-top: 1%;
               display: flex;
-              flex-direction: column;
+              flex-direction:row;
               margin-left: 14%;
+                .bottom-left{
+                  width: 45%;
+                  display: flex;
+                  flex-direction: column;
+                }
+                .bottom-right{
+                  width: 45%;
+                  display: flex;
+                  flex-direction: column;
+                    .gonggao1, .gonggao2, .gonggao3{
+                      width: 40%;
+                      height: 33%;
+                      border: 1px solid black;
+                      margin-top: 2%;
+                    }
+                    .gonggao1{
+                      background-color: lightskyblue;
+                    }
+                    .gonggao2{
+                      background-color:lime;
+                    }
+                    .gonggao3{
+                      background-color: rgb(245, 118, 213);
+                    }
+                }
             }
     }
     

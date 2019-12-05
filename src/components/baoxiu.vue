@@ -28,7 +28,9 @@
             </el-form-item>
             <br><br>
             <el-form-item label="故障图片">
-                <input type='file' @change = "getFile($event)">
+                <div class="upload-file">选择文件
+                    <input type='file' @change = "getFile($event)">
+                </div>
                 <el-dialog :visible.sync="dialogVisible">
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
@@ -380,5 +382,33 @@ export default {
     .sub{
         position: relative;
         left: -25%;
+    }
+    .upload-file{
+         position: relative;
+         display: inline-block;
+         left:-44%;
+         background: #D0EEFF;
+         border: 1px solid #99D3F5;
+         border-radius: 4px;
+         padding: 4px 12px;
+         overflow: hidden;
+         color: #1E88C7;
+         text-decoration: none;
+         text-indent: 0;
+         line-height: 20px;
+    }
+    .upload-file input{
+         position: absolute;
+         font-size: 100px;
+         right: 0;
+         top: 0;
+         opacity: 0;
+    }
+    .upload-file:hover{
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+        cursor: hand;
     }
 </style>
