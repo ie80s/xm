@@ -2,23 +2,25 @@
   <div class="order" >
     <div class="order-top" v-for="item in xianshi.slice((currentPage-1)*pageSize,currentPage*pageSize)" 
     :key = "item.rid" :data = "xianshi" style = "width:100%">
-        <div class="image">
+    <div class="aaa">
+      <div class="image">
            <img :src="'http://' + item.image" width="150" height="150">
         </div>
           <div class="information">
+            <p>{{ item.rtype }}</p>
             <span>{{ item.rdate | dateFormat('yyyy-mm-dd') }}</span>
             <span>{{ item.wstatic }}</span>
             </div>
-           <div class="description"><p>{{ item.rdes }}</p></div>
       </div>
-   
+      <div class="description"><p>{{ item.rdes }}</p></div>
+    </div>   
     <div class="footer">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-size="pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout=" prev, pager, next, jumper"
           :total="xianshi.length">
         </el-pagination>
       </div>
@@ -80,20 +82,26 @@ export default {
 </script>
 
 <style lang="scss">
-    .order{
+    .order-top{
         border: 1px solid rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction:column;
         width: 84%;
         margin-top: 2%;
-            .order-top{
+            .aaa{
                 display: flex;
                 flex-direction: row;
-                    span{
-                        margin-left: -30%;
-                        font-size: 20px;
-                        font-weight: bold;
+                    p{
+                      text-align: left;
+                      font-size: 24px;
+                      margin: 0;
+                      margin-bottom: 5%;
                     }
+                    // span{
+                    //     margin-left: -30%;
+                    //     font-size: 20px;
+                    //     font-weight: bold;
+                    // }
             }
             .description{
                 background-color: rgba(0, 0, 0, 0.2);
