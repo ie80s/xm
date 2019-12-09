@@ -152,18 +152,6 @@ export default {
       ugrade:this.ruleForm2.ugrade
     },
     ))
-      // this.$refs[formName].validate(valid => {
-      //   console.log(this)
-      //   if (valid) {
-      //     setTimeout(() => {
-      //       alert('注册成功')
-      //       this.$router.push('/')
-      //     }, 400); 
-      //   } else {
-      //     console.log("error submit!!");
-      //     return false;
-      //   }
-      // })
     },
     // <!--进入登录页-->
     gotoLogin() {
