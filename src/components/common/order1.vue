@@ -7,7 +7,7 @@
            <img :src="'http://' + item.image" width="150" height="150">
         </div>
           <div class="information">
-            <p>{{ item.rtype }}</p>
+            <a @click = "move(item.rid)">{{ item.rtype }}</a>
             <span>{{ item.rdate | dateFormat('yyyy-mm-dd') }}</span>
             <span>{{ item.wstatic }}</span>
             </div>
@@ -20,7 +20,7 @@
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-size="pageSize"
-          layout=" prev, pager, next, jumper"
+          layout=" prev, pager, next, jumper ,total"
           :total="xianshi.length">
         </el-pagination>
       </div>
@@ -76,6 +76,9 @@ export default {
       },
       handleCurrentChange(val) {
         this.currentPage = val;
+      },
+      move(e){
+        console.log(e)
       }
   }
 }
