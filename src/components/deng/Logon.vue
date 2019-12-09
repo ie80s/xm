@@ -12,13 +12,13 @@
           class="demo-ruleForm"
         >
           <el-form-item prop="tel">
-            <el-input v-model="ruleForm2.tel" auto-complete="off" placeholder="请输入手机号"></el-input>
+            <el-input v-model="ruleForm2.utel" auto-complete="off" placeholder="请输入手机号"></el-input>
           </el-form-item>
           <el-form-item prop="pass">
-            <el-input type="password" v-model="ruleForm2.pass" auto-complete="off" placeholder="输入密码"></el-input>
+            <el-input type="password" v-model="ruleForm2.upsd" auto-complete="off" placeholder="输入密码"></el-input>
           </el-form-item>
           <el-form-item prop="checkPass">
-            <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="确认密码"></el-input>
+            <el-input type="password" v-model="ruleForm2.checkupsd" auto-complete="off" placeholder="确认密码"></el-input>
           </el-form-item>
           <el-form-item prop="smscode" class="code">
             <el-input v-model="ruleForm2.smscode" placeholder="验证码"></el-input>
@@ -34,11 +34,16 @@
   </div>
 </template>
 <script> 
+import axios from "axios";
+import qs from 'Qs';
+import logoinVue from './logoin.vue'
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://47.94.10.228';
 export default {
   name: "Register", 
   data() {
     // <!--验证手机号是否合法-->
-    let checkTel = (rule, value, callback) => {
+    let checkutel = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入手机号码'))
       } else if (!this.checkMobile(value)) {
@@ -56,21 +61,21 @@ export default {
       }
     }
     // <!--验证密码-->
-    let validatePass = (rule, value, callback) => {
+    let validateupsd = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"))
       } else {
-        if (this.ruleForm2.checkPass !== "") {
-          this.$refs.ruleForm2.validateField("checkPass");
+        if (this.ruleForm2.checkupsd !== "") {
+          this.$refs.ruleForm2.validateField("checkupsd");
         }
         callback()
       }
     }
     // <!--二次验证密码-->
-    let validatePass2 = (rule, value, callback) => {
+    let validateupsd2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== this.ruleForm2.pass) {
+      } else if (value !== this.ruleForm2.upsd) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -78,15 +83,19 @@ export default {
     };
     return {  
       ruleForm2: {
-        pass: "",
-        checkPass: "",
-        tel: "",
-        smscode: ""
+        uid: "1",
+        upsd: "",
+        checkupsd:"",
+        uname: "1",
+        uemail: "1",
+        utel:"",
+        udept:"1",
+        ugrade:1
       },
       rules2: {
-        pass: [{ validator: validatePass, trigger: 'change' }],
-        checkPass: [{ validator: validatePass2, trigger: 'change' }],
-        tel: [{ validator: checkTel, trigger: 'change' }],
+        upsd: [{ validator: validateupsd, trigger: 'change' }],
+        checkupsd: [{ validator: validateupsd2, trigger: 'change' }],
+        utel: [{ validator: checkutel, trigger: 'change' }],
         smscode: [{ validator: checkSmscode, trigger: 'change' }],
       },
       buttonText: '获取验证码',
@@ -96,10 +105,20 @@ export default {
   }, 
   methods: {
     // <!--发送验证码-->
+  // loginbutton(ruleForm2){
+  // if(
+  //   this.checkTel() &&
+  //   this.checkPwd() &&
+  //   this.checkCode()
+  // )
+  // {
+   
+  // }
+// },
     sendCode () {
-      let tel = this.ruleForm2.tel
-      if (this.checkMobile(tel)) {
-        console.log(tel)
+      let utel = this.ruleForm2.utel
+      if (this.checkMobile(utel)) {
+        console.log(utel)
         let time = 60
         this.buttonText = '已发送'
         this.isDisabled = true
@@ -119,26 +138,40 @@ export default {
       }
     },
     // <!--提交注册-->
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          setTimeout(() => {
-            alert('注册成功')
-            this.$router.push('index')
-          }, 400); 
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      })
+    submitForm(ruleForm2) {
+      console.log(this.ruleForm2)
+   axios
+    .post("/user/register",
+    qs.stringify({
+      utel:this.ruleForm2.uid,
+      uid:this.ruleForm2.utel,
+      upsd:this.ruleForm2.upsd,
+      uname:this.ruleForm2.uname,
+      uemail:this.ruleForm2.uemail,
+      udept:this.ruleForm2.udept,
+      ugrade:this.ruleForm2.ugrade
+    },
+    ))
+      // this.$refs[formName].validate(valid => {
+      //   console.log(this)
+      //   if (valid) {
+      //     setTimeout(() => {
+      //       alert('注册成功')
+      //       this.$router.push('/')
+      //     }, 400); 
+      //   } else {
+      //     console.log("error submit!!");
+      //     return false;
+      //   }
+      // })
     },
     // <!--进入登录页-->
     gotoLogin() {
       this.$router.push({
-        path: "/logoin"
+        path: "/deng/logoin"
       });
     },
-    // 验证手机号
+    // 验证手机号i
     checkMobile(str) {
       let re = /^1\d{10}$/
       if (re.test(str)) {
@@ -146,11 +179,11 @@ export default {
       } else {
         return false;
       }
-    }
+    },
+    
   }
 };
 </script>
-
 <style scoped lang="scss">
 .loading-wrapper {
   position: fixed;

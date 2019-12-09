@@ -9,6 +9,7 @@ import axios from 'axios'
 import {store} from './store/store' // 引入store
 import qs from 'Qs'
 
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(axios);
@@ -41,4 +42,3 @@ Vue.filter('dateFormat', function (dateStr, pattern = "") {
     return `${y}-${m}-${d} ${hh}:${mm}:${ss} `
   }
 })
-
