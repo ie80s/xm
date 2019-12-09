@@ -12,6 +12,9 @@ import index from '@/components/index'
 import Logon from  '@/components/deng/Logon'
 import message from '@/components/message'
 import myrepair from '@/components/myrepair'
+import ziliao from '@/components/module/ziliao'
+import shezhi from '@/components/module/shezhi'
+import yinsi from '@/components/module/yinsi'
 
 
 Vue.use(Router)
@@ -67,6 +70,22 @@ export default new Router({
       path:'/myrepair',
       name:'myrepair',
       component:myrepair
+    },
+    {
+      path:'/ziliao',
+      name:'ziliao',
+      component:ziliao
+    },
+    {
+      path:'/shezhi',
+      name:'shezhi',
+      component:shezhi
+    },
+    {
+      path:'/yinsi',
+      name:'yinsi',
+      component:yinsi
+    },
     }
   ]
 })
