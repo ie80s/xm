@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import logoin from '@/components/logoin'
-import index from '@/components/index'
 import Logon from  '@/components/Logon'
 import baoxiu from '@/components/baoxiu'
 import index1 from '@/components/index1'
@@ -19,11 +17,6 @@ export default new Router({
       path: '/',
       name: 'index2',
       component: index2
-    },
-    {
-      path:'/logoin',
-      name:'logoin',
-      component: logoin
     },
     {
       path:'/Logon',
@@ -49,11 +42,6 @@ export default new Router({
       path: '/upload_test',
       name: 'upload_test',
       component: upload_test
-    },
-    {
-      path: '/index',
-      name: 'index',
-      component: index
     },
   ]
 })
