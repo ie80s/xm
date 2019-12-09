@@ -160,7 +160,7 @@ export default {
 .e-com{
     width: 100%;
     height: 200px;
-    background-color: coral;
+    
 } 
 .d-com{
     width: 40%;

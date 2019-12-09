@@ -17,7 +17,7 @@
                 </div>
                  
             </div>
-            <hr size="2px" noshade="true">
+            <hr size="1px" noshade="true">
 
             <condition></condition>
         </div>
@@ -76,12 +76,12 @@ i{
 #repair{
     // border: 1px solid black;
     width: 100%;
-    height: 900px;
+    height: 100%;
     display: flex;
     flex-direction: row;
         .mine{
             width: 15%;
-            height: 100%;
+            height: 735px;
             border: 1px solid black;
             margin-left: 15%;
             display: inline-flex;

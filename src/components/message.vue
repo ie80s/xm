@@ -7,14 +7,10 @@
         <div class="m-c-1">
             <div class="m-c-1-1">
                 <div class="information-1">报修详情</div>
-                            <!-- <el-table :data="repairList" v-for="item in repairInfo" :key="item.rid" style="width: 100%"> 
-                                    <el-table-column label="编号 ID" >{{item.rid}}</el-table-column>
-                                    <el-table-column label="维修类型" >{{item.rtype}}</el-table-column>
-                                    <el-table-column label="地址" >{{item.radr}}</el-table-column>                                    
-                            </el-table>                     -->
                             <template>
                                     <el-table 
-                                        v-for="item in repairInfo.slice(0,1)" :key="item.rid"
+                                        v-for="item in repairInfo.slice(0,5)" 
+                                        :key="item.rid"
                                         :data="repairList"
                                         style="width: 100%"
                                         height="150">
@@ -41,7 +37,7 @@
                                                 prop="tel"
                                                 label="电话"
                                                 width="120">
-                                                    {{item.rtel}}
+                                                    {{item.utel}}
                                             </el-table-column>
                                             <el-table-column
                                                 prop="des"
@@ -83,7 +79,7 @@ import qs from 'Qs';
         repairList: [{
           rid: '',
           rtype: '',
-          rtel: '',
+          utel: '',
           rdes: '',
           rdata: '',
           radr:'',
@@ -93,8 +89,8 @@ import qs from 'Qs';
       }  
     },
       created(){
-          axios.post("/record/rmess",
-      qs.stringify({
+        axios.post("/record/rmess",
+        qs.stringify({
         udept: '青岛工学院'
       }))
       .then(res => {
