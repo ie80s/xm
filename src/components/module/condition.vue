@@ -1,20 +1,26 @@
 <template>
     <div id="Condition">
-        <div  class="conrepair" v-for="item in repairInfo.slice(0,3)"
+        <div class="conrepair" v-for="item in repairInfo.slice((currentPage-1)*pageSize,currentPage*pageSize)"
             :key="item.rid"
             :data="repairList"
             style="width: 100%">
             <el-row>
                 <el-col :span="12">
                     <div class="grid-content bg-purple">
-                        <span>类型:{{item.rtype}}</span><br>
-                        <span>时间:{{ item.rdate | dateFormat('yyyy-mm-dd') }}</span> 
+                        <span>类型：{{item.rtype}}</span><br>
+                        <span>时间：{{ item.rdate | dateFormat('yyyy-mm-dd') }}</span><br>
+                        
                         <div class="img">
-                            <img :src="'http://' + item.image" width="150" height="150" class="img-icon">
+                            <img :src="'http://' + item.image" width="150" height="150">
                         </div> 
                     </div>
                 </el-col>
-                <el-col :span="12" class="col-ws"><div class="grid-content bg-purple-light"><i>状态:{{  item.wstatic }}</i></div></el-col>
+                <el-col :span="12" class="col-ws">
+                  <div class="grid-content bg-purple-light">
+                    <i>状态：{{ item.wstatic }}</i><br>
+                    <i>联系电话：{{ item.utel }}</i>
+                  </div>
+                </el-col>
             </el-row>
             
         </div>
@@ -23,10 +29,11 @@
             <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page.sync="currentPage3"
-                :page-size="100"
+                :current-page.sync="currentPage"              
+                :page-size="pageSize"
                 layout="prev, pager, next, jumper"
-                :total="1000">
+                :total="repairInfo.length"
+                >
             </el-pagination>
         </div>
     </div>
@@ -41,40 +48,38 @@ import qs from 'Qs';
 export default {
     data(){
         return{      
-            currentPage3: 1, 
+            currentPage: 1, 
             repairList:[{
                 rtype: '',
                 rdata: '',
                 wstatic: "待维修", 
                 image:'' ,
+                utel:' ',
             }] ,
-            repairInfo:[]
+            repairInfo:[],
+            pageSize:3, 
         }
 
     },
     methods: {
       handleSizeChange(val) {
-        console.log(`每页 3 条`);
+        this.currentPage = 1;
+        this.pageSize = val;
       },
       handleCurrentChange(val) {
-        console.log(`当前页: 1`);
+        this.currentPage = val;
       }
     },
     created(){
-          axios
-      .post("/record/rmess",
+      axios.post("/record/rmess",
       qs.stringify({
-        udept: '青岛工学院'
+      udept: '青岛工学院'
       }))
       .then(res => {
-            this.repairInfo= res.data.list
-            console.log(this.repairInfo)
-            
-        })
-      },
-    // components:{
-    //     Repairs
-    // }
+        this.repairInfo= res.data.list
+        console.log(this.repairInfo)      
+      })
+    },
   }
 
 
@@ -97,7 +102,7 @@ export default {
 
 #Condition{
     width: 100%;
-    height: 715px;
+    height: 100%;
     display: inline-flex;
     flex-direction: column;
     
