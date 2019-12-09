@@ -11,12 +11,12 @@
             </el-form-item>
             <br><br>
             <el-form-item label="故障地址">
-                <el-input v-model="form.address" placeholder="请输入详细的故障地址，如门牌号等"></el-input>
+                <el-input v-model="form.radr" placeholder="请输入详细的故障地址，如门牌号等"></el-input>
             </el-form-item>
             <br><br>
             <el-form-item label="维修项目">
                  <el-cascader
-                    v-model="form.project"
+                    v-model="form.rtype"
                     :options="options"
                     :props="{ expandTrigger: 'hover' }"
                     @change="handleChange"
@@ -24,17 +24,13 @@
             </el-form-item>
             <br><br>
             <el-form-item label="故障描述">
-                <el-input type="textarea" v-model="form.desc" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请详细填写故障描述，字数控制在6~300字之间"></el-input>
+                <el-input type="textarea" v-model="form.rdes" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请详细填写故障描述，字数控制在6~300字之间"></el-input>
             </el-form-item>
             <br><br>
             <el-form-item label="故障图片">
-                <el-upload
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    list-type="picture-card"
-                    :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove">
-                    <i class="el-icon-plus"></i>
-                </el-upload>
+                <div class="upload-file">选择文件
+                    <input type='file' @change = "getFile($event)">
+                </div>
                 <el-dialog :visible.sync="dialogVisible">
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
@@ -53,7 +49,7 @@
             <br><br>
             <div class="sub">
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit">立即提交</el-button>
+                    <el-button type="primary" @click="onSubmit(form)">立即提交</el-button>
                 </el-form-item>
             </div>           
         </el-form>
@@ -63,16 +59,23 @@
 </template>
 
 <script>
+import axios from 'axios'
 import ttitle from '@/components/common/ttitle'
+import { async } from 'q';
 export default {
     data(){
         return{
+            upLoadUrl:'47.94.10.228/record/insertTo',
             form:{
+                ruid:'xxbb',
                 region:'',
-                address:'',
-                project:'',
-                desc:'',
-                tel:'',
+                udept:'青岛工学院',
+                radr:'asd',
+                rtype:'asd',
+                rdes:'asd',
+                tel:'11111111111',
+                rdate:'2010/10/10',
+                wstatic:'待维修',
             },
              options: [{
                 value: 'zhinan',
@@ -268,29 +271,76 @@ export default {
                     value: 'jiaohu',
                     label: '组件交互文档'
                 }]
-            }],
+            }],           
             dialogImageUrl: '',
             dialogVisible: false
         };
     },
      methods: {
+      getFile(event){
+          this.file = event.target.files[0];
+          console.log(this.file)
+      },
       handleChange(value) {
         console.log(value);
       },
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
+        onSubmit(form) {
+            let formData = new FormData()
+            formData.append('ruid',this.form.ruid)
+            formData.append('rdate',this.form.rdate)
+            formData.append('radr',this.form.radr)
+            formData.append('rtype',this.form.rtype)
+            formData.append('wstatic',this.form.wstatic)
+            formData.append('rdes',this.form.rdes)
+            formData.append("image",this.file)
+            formData.append("udept",this.form.udept)
+            let config = {
+                headers:{
+                   "Content-Type": "multipart/form-data"
+                }
+            }
+            axios.post("http://47.94.10.228/record/insertTo", formData, config).then(res => {
+                if (res.status === 200) {
+                    console.log(res);
+                }
+            })
       },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-        },
-        onSubmit() {
-        console.log('submit!');
+      getTime(){
+          var _this = this;
+          let year = new Date().getFullYear();
+          let month = new Date().getMonth() + 1;
+          let day = new Date().getDate();
+          let hour = new Date().getHours();
+          let min = new Date().getMinutes() < 10? '0'+new Date().getMinutes() : new Date().getMinutes();
+          _this.form.rdate = year + '-' + month + '-' + day;
+      },
+      currentTime(){
+            setInterval(this.getTime,500)
+      },
+      imgSucess(res, file, fileList){
+        console.log(res)
+        console.log(file)
+        console.log(fileList)
       }
     },
     components: {
         ttitle
     },
+    created(){
+        this.currentTime(); 
+    },
+    computed:{
+        upData(){
+            return{
+                body: this.form 
+            }
+        },
+        headerMsg(){
+            return{
+                 "authToken":window.sessionStorage.getItem('authToken')
+            }
+        }
+    }
 }
 </script>
 
@@ -332,5 +382,33 @@ export default {
     .sub{
         position: relative;
         left: -25%;
+    }
+    .upload-file{
+         position: relative;
+         display: inline-block;
+         left:-44%;
+         background: #D0EEFF;
+         border: 1px solid #99D3F5;
+         border-radius: 4px;
+         padding: 4px 12px;
+         overflow: hidden;
+         color: #1E88C7;
+         text-decoration: none;
+         text-indent: 0;
+         line-height: 20px;
+    }
+    .upload-file input{
+         position: absolute;
+         font-size: 100px;
+         right: 0;
+         top: 0;
+         opacity: 0;
+    }
+    .upload-file:hover{
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+        cursor: hand;
     }
 </style>

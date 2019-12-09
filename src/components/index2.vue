@@ -28,32 +28,36 @@
            </div>
       </div>
       <div class="bottom">
-        <order></order>
-        <order></order>
-        <order></order>
-        <order></order>
-        <order></order>
-      </div>
-      <div class="footer">
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="10"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="40">
-        </el-pagination>
+        <div class="bottom-left">
+          <order1></order1>
+        </div>
+        <div class="bottom-right">
+          <div class="gonggao1">
+            <h2>公告</h2>
+            <p>asdasdaafasfasfasafafsaf</p>
+          </div>
+          <br>
+          <div class="gonggao2">
+            <h2>公告</h2>
+            <p>asdasdaafasfasfasafafsaf</p>
+          </div>
+          <br>
+          <div class="gonggao3">
+            <h2>公告</h2>
+            <p>asdasdaafasfasfasafafsaf</p>
+          </div>
+          <br>
+        </div>
       </div>
   </div>
 </template>
 
 <script>
 import ttitle from '@/components/common/ttitle'
-import order from '@/components/common/order'
+import order1 from '@/components/common/order1'
 export default {
   components: {
-      ttitle,order
+      ttitle,order1
   },
   props: {
 
@@ -97,12 +101,7 @@ export default {
       handleClick() {
         alert('button click');
       },
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
+      
   }
 }
 </script>
@@ -128,20 +127,38 @@ export default {
                         width: 25%;
                     }
             }
-            .footer{              
-              margin-top: 4%;
-              margin-left: 8%;
-              width: 50%;
-                .el-pagination{
-                  margin-left: -18%;
-                }
-            }
+            
             .bottom{              
-              width: 50%;
+              width: 100%;
               margin-top: 1%;
               display: flex;
-              flex-direction: column;
+              flex-direction:row;
               margin-left: 14%;
+                .bottom-left{
+                  width: 45%;
+                  display: flex;
+                  flex-direction: column;
+                }
+                .bottom-right{
+                  width: 45%;
+                  display: flex;
+                  flex-direction: column;
+                    .gonggao1, .gonggao2, .gonggao3{
+                      width: 40%;
+                      height: 33%;
+                      border: 1px solid black;
+                      margin-top: 2%;
+                    }
+                    .gonggao1{
+                      background-color: lightskyblue;
+                    }
+                    .gonggao2{
+                      background-color:lime;
+                    }
+                    .gonggao3{
+                      background-color: rgb(245, 118, 213);
+                    }
+                }
             }
     }
     

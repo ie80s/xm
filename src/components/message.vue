@@ -6,71 +6,61 @@
     <div class="m-Acom-c">
         <div class="m-c-1">
             <div class="m-c-1-1">
-                <div class="information-1">报修详情</div>     
-                    <el-row :gutter="20">
-                        <el-col :span="15">
-                            <div class="grid-content bg-purple">
-                                <div class="grid-input">
-                                <i>报修编号：</i>
-                                <input type="text" placeholder="xxxx" disabled="true"><br>
-                                <i>报修地点：</i>
-                                <input type="text" placeholder="xxxx" disabled="true"><br>
-                                 <i>报修事项：</i>
-                                <input type="text" placeholder="xxxx" disabled="true"><br>
-                                 <i class="input-title">标题：</i>
-                                <input type="text" placeholder="xxxx" disabled="true" class="grid-title"><br>
-                                 <i class="input-title">内容：</i>
-                                <input type="text" placeholder="xxxx" disabled="true" class="grid-title"><br>
-                                <i>提交时间：</i>
-                                <input type="text" placeholder="xxxx" disabled="true"><br>
-                                <i>当前状态：</i>
-                                <input type="text" placeholder="xxxx" disabled="true"><br>
-                                <i class="input-people">提交人：</i>
-                                <input type="text" placeholder="xxxx" disabled="true" class="grid-people">
-                                </div>
-                            </div>
-                        </el-col>
-                        <el-col :span="5">
-                            <div class="grid-content bg-purple">
-                               
-                                </div>
-                        </el-col>
-                    </el-row>
-                    
-                    
-            </div>
-            <div class="m-c-1-2">
-                <div class="information-2">派工信息</div>
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <div class="grid-content bg-purple">
-                                <div class="grid-inf">
-                                    <i>派工时间：</i>
-                                    <input type="text" placeholder="xxxx" disabled="true"><br>
-                                </div>
-                            </div>
-                         </el-col>
-                         <el-col :span="12">
-                             <div class="grid-content bg-purple">
-                                 <div class="grid-inf">
-                                    <i>维修员：</i>
-                                    <input type="text" placeholder="xxxx" disabled="true"><br>
-                                </div>
-                             </div>
-                         </el-col>
-                    </el-row>
-            </div>
-        </div>
-        <div class="m-c-2">
-            <div class="m-c-2-1">
-                <div class="G-m">公告</div>
-            </div>
-            <div class="m-c-2-2">
-                <div class="Tel-m">报修电话</div>
-            </div>
-            <div class="m-c-2-3">
-                <div class="Me-m">报修须知</div>
-            </div>
+                <div class="information-1">报修详情</div>
+                            <template>
+                                    <el-table 
+                                        v-for="item in repairInfo.slice(0,5)" 
+                                        :key="item.rid"
+                                        :data="repairList"
+                                        style="width: 100%"
+                                        height="150">
+                                            <el-table-column
+                                                fixed
+                                                prop="date"
+                                                label="编号 ID"
+                                                width="120">
+                                                    {{item.rid}}
+                                                </el-table-column>
+                                            <el-table-column
+                                                prop="name"
+                                                label="维修类型"
+                                                width="120">
+                                                    {{item.rtype}}
+                                            </el-table-column>
+                                            <el-table-column
+                                                prop="addr"
+                                                label="地址"
+                                                width="120">
+                                                    {{item.radr}}
+                                            </el-table-column>
+                                            <el-table-column
+                                                prop="tel"
+                                                label="电话"
+                                                width="120">
+                                                    {{item.utel}}
+                                            </el-table-column>
+                                            <el-table-column
+                                                prop="des"
+                                                label="描述"
+                                                width="250">
+                                                    {{item.rdes}}
+                                            </el-table-column>
+                                            <el-table-column
+                                                prop="data"
+                                                label="时间"
+                                                width="120">
+                                                    {{ item.rdate | dateFormat('yyyy-mm-dd') }}
+                                            </el-table-column>
+                                            <el-table-column
+                                                prop="state"
+                                                label="时间"
+                                                width="120">
+                                                    {{item.wstatic}}
+                                            </el-table-column>
+                                    </el-table>
+                                </template>
+
+            </div>          
         </div>
     </div>
     <div class="m-Acom-d"></div>
@@ -80,28 +70,46 @@
 
 
 <script>
-export default {
+
+import axios from "axios";
+import qs from 'Qs';
+ export default {
     data() {
       return {
-         input: '',
-    }
-}
-}
+        repairList: [{
+          rid: '',
+          rtype: '',
+          utel: '',
+          rdes: '',
+          rdata: '',
+          radr:'',
+          wstatic: "待维修",
+        }],
+        repairInfo:[],
+      }  
+    },
+      created(){
+        axios.post("/record/rmess",
+        qs.stringify({
+        udept: '青岛工学院'
+      }))
+      .then(res => {
+        this.repairList.rid=res.data.list.rid
+        this.repairInfo= res.data.list
+        console.log(this.repairInfo)
+        })
+      },
+  }
 </script>
-
-
-
-
-
 <style scoped lang="scss">
 #m-Acom{
     width: 100%;
-    height: 750px;
+    height: 100%;
     display: flex;
     // border: 2px solid black;
     flex-direction: row;
         .m-Acom-b{
-            width: 15%;
+            width: 25%;
             height: 100%;
             // background-color:cyan;
             
@@ -110,18 +118,18 @@ export default {
             width: 70%;
             height: 100%;
             display: inline-flex;
-           
+            flex-direction:row;
             .m-c-1{
-                width: 70%; 
-                height: 100%;
-                
+                width: 75%; 
+                height: 100%;  
                 display: flex;
                 flex-direction: column;
                
                     .m-c-1-1{
                         width: 100%;
-                        height: 60%;
+                        height: 100%;
                         border: 1px solid black;  
+                        margin-right: 5%;
                         
                        
                         .information-1{
@@ -129,67 +137,11 @@ export default {
                             height: 20%;
                             background-color: cornflowerblue;
                             font-size: 25px;
-                            color: aliceblue;
-                            
-                        } 
-                        
-                    }
-                    .m-c-1-2{
-                        width: 100%;
-                        height: 45%;
-                        border: 1px solid black;
-                        margin-top: 3%;  
-                        .information-2{
-                            width: 100%;
-                            height: 20%;
-                            background-color: cornflowerblue;
-                             font-size: 25px;
-                             color: aliceblue;
-                        }   
-                    }
+                            color: aliceblue;                            
+                        }                        
+                    }                  
             }
-
-            .m-c-2{
-                width: 25%; 
-                height: 100%;
-               
-                display: flex;
-                flex-direction: column;
-                margin-left: 5%;
-                    .m-c-2-1{
-                        width: 100%;
-                        height: 35%;
-                        border: 1px solid black; 
-                        .G-m{
-                          width: 100%;
-                          height: 30%;
-                          background-color:cornflowerblue;  
-                        } 
-                    }
-                    .m-c-2-2{
-                        width: 100%;
-                        height: 35%;
-                        border: 1px solid black;
-                        margin-top: 10%;
-                        .Tel-m{
-                          width: 100%;
-                          height: 30%;
-                          background-color:darkkhaki;  
-                        } 
-                    }
-                    .m-c-2-3{
-                        width: 100%;
-                        height: 35%;
-                        border: 1px solid black;
-                        margin-top: 10%;
-                        .Me-m{
-                          width: 100%;
-                          height: 30%;
-                          background-color:fuchsia;  
-                        } 
-                    }
-            }
-        }  
+           
         .m-Acom-d{
             width: 15%;
             height: 100%;
@@ -197,76 +149,18 @@ export default {
         }
 
 }
-
-.title{
-    margin-left: 3%;
 }
 
-
-.submitter{
-    margin-left: 1%;  
-}
-
-
-.el-row {
-    margin-bottom: 20px;
-    margin-top: 2%;
-    &:last-child {
-      margin-bottom: 0;
-    }
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
   }
-  .el-col {
-    border-radius: 4px;
-  }
-//   .bg-purple-dark {
-//     background: #99a9bf;
-//   }
-//   .bg-purple {
-//     background: #d3dce6;
-//   }
-//   .bg-purple-light {
-//     background: #e5e9f2;
-//   }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
-  i{
-     
-      font-size: 15px;
-  }
-  input{
-      border: 0px;
-      background-color: white;
-      width: 150px;
-      height: 35px;
-  }
-  .grid-input{
-      margin-right: 50%;
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
   }
 
-.grid-title{
-    margin-left: 0%;
-}
-
-.grid-people{
-    margin-left: 0%;
-}
-
-.input-title{
-    margin-left: 10%;
-}
-
-.input-people{
-    margin-left: 5%
-}
 
 
-.grid-inf{
-    margin-right: 30%;
-}
 </style>
