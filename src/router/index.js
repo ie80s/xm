@@ -11,6 +11,7 @@ import message from '@/components/message'
 import myrepair from '@/components/myrepair'
 import ziliao from '@/components/module/ziliao'
 import shezhi from '@/components/module/shezhi'
+import ww from '@/components/ww'
 import yinsi from '@/components/module/yinsi'
 
 
@@ -74,6 +75,11 @@ export default new Router({
       path:'/yinsi',
       name:'yinsi',
       component:yinsi
+    }, 
+    {
+      path:'/ww',
+      name:'ww',
+      component:ww
     }, 
   ]
 })
