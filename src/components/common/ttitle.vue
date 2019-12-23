@@ -6,7 +6,7 @@
           <el-menu-item index="1" disabled>在线报修系统</el-menu-item>
         </div>
         <div class = 'middle'>
-           <el-menu-item index="2"><router-link to="index2">首页</router-link></el-menu-item>
+           <el-menu-item index="2"><router-link to="/">首页</router-link></el-menu-item>
            <el-menu-item index="3"><router-link to="baoxiu">我要报修</router-link></el-menu-item>
            <el-menu-item index="4"><router-link to="myrepair">我的报修</router-link></el-menu-item>
             <el-menu-item index="4"><router-link to="ziliao">个人资料</router-link></el-menu-item>

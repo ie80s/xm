@@ -9,7 +9,7 @@
                 <div class="information-1">报修详情</div>
                             <template>
                                     <el-table 
-                                        v-for="item in repairInfo.slice(0,5)" 
+                                        v-for="item in xxb"
                                         :key="item.rid"
                                         :data="repairList"
                                         style="width: 100%"
@@ -86,18 +86,31 @@ import qs from 'Qs';
           wstatic: "待维修",
         }],
         repairInfo:[],
-      }  
+        xxb:[],
+        id:'',
+      }
     },
       created(){
         axios.post("/record/rmess",
         qs.stringify({
-        udept: '青岛工学院'
+        udept: '青岛工学院',
       }))
       .then(res => {
         this.repairList.rid=res.data.list.rid
         this.repairInfo= res.data.list
         console.log(this.repairInfo)
+        for(let i = 0; i < this.repairInfo.length;i++){
+              let obj = this.repairInfo[i];
+              if(obj.rid == this.id){
+                  this.xxb.push(obj)
+              }
+          }
+          console.log(this.xxb)
         })
+      },
+      mounted(){
+          this.id = this.$route.params.id
+          console.log(this.id)         
       },
   }
 </script>

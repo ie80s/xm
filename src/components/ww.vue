@@ -4,10 +4,10 @@
       <div class="top">
           <div class = "search">
             <el-input v-model="keywords" placeholder="请输入关键字"></el-input>
-            <el-button type="primary">搜索</el-button>
+            <el-button type="primary" @click = 'search'>搜索</el-button>
           </div>
           <div class="type1">
-            <el-select v-model="value1" placeholder="请选择">
+            <el-select v-model="value" placeholder="请选择">
                 <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -17,9 +17,9 @@
             </el-select>
            </div>
            <div class="type2">
-            <el-select v-model="value2" placeholder="请选择">
+            <el-select v-model="value" placeholder="请选择">
                 <el-option
-                v-for="item in statics"
+                v-for="item in options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -64,41 +64,27 @@ export default {
   },
   data() {
     return {
+        resultList:[],
+        xianshi:[],
         keywords:'',
         currentPage:4,
         options: [{
           value: '选项1',
-          label: '电器'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '用品'
+          label: '双皮奶'
         }, {
           value: '选项3',
-          label: '椅子'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '电子设备'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '多媒体'
-        },{
-          value: '选项6',
-          label: '警报器'
-        },{
-          value: '选项7',
-          label: '电风扇'
+          label: '北京烤鸭'
         }],
-        value1:'',
-        value2:'',
-        statics:[
-          {
-          value: '选项1',
-          label: '已维修'
-        }, {
-          value: '选项2',
-          label: '未维修'
-        }
-        ]
+        value:''
     }
   },
   computed: {
@@ -117,7 +103,24 @@ export default {
       handleClick() {
         alert('button click');
       },
-      
+      search(){
+        if(this.keywords == ''){
+          return 
+        }
+        this.resultList = []
+        this.xianshi.forEach(item =>{           
+          if (item.radr.indexOf(this.keywords) > -1 ||
+              item.rtypr.indexOf(this.keywords) > -1 ||
+              item.rdes.indexOf(this.keywords) > -1 ||
+              item.wstatic.indexOf(this.keywords) > -1) {
+            this.resultList.push(item)
+          }
+        })
+        if (this.resultList.length == 0) {   //如果没有匹配结果，就显示提示信息
+            console.log('没有结果')
+            console.log(this.resultList)
+      }
+      }
   }
 }
 </script>
