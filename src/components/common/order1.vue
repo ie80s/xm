@@ -7,7 +7,7 @@
            <img :src="'http://' + item.image" width="150" height="150">
         </div>
           <div class="information">
-            <a href="#" @click = "move(item.rid)">{{ item.rtype }}</a>
+            <span @click = "move(item.rid)">{{ item.rtype }}</span>
             <span>{{ item.rdate | dateFormat('yyyy-mm-dd') }}</span>
             <span>{{ item.wstatic }}</span>
             </div>
@@ -78,7 +78,11 @@ export default {
         this.currentPage = val;
       },
       move(e){
-        console.log(e)
+        window.console.log("查询成功", e);
+        this.$router.push({
+          name:'message',
+          params:{ id: e }
+        });
       }
   }
 }
