@@ -110,6 +110,7 @@ export default {
     .page{
         width: 100%;
         height: 100%;
+        
             .top{
                 display: flex;
                 flex-direction: row;
@@ -129,7 +130,7 @@ export default {
             }
             
             .bottom{              
-              width: 100%;
+              width: 80%;
               margin-top: 1%;
               display: flex;
               flex-direction:row;
@@ -143,6 +144,7 @@ export default {
                   width: 45%;
                   display: flex;
                   flex-direction: column;
+                  margin-left: 5%;
                     .gonggao1, .gonggao2, .gonggao3{
                       width: 40%;
                       height: 33%;

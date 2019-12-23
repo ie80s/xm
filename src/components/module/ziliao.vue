@@ -5,9 +5,8 @@
           <el-container>
           <el-header class="wu">
             <div class="first">
-              <div class="fir"><el-button  round>个人资料</el-button></div>
-              <div class="sen"><el-button  round>返回首页</el-button></div>
-              <!-- <div class="sec"><el-button  round>确认更改</el-button></div> -->
+              <div class="fir"><el-button round>个人资料</el-button></div>
+              <div class="sen"><el-button round>返回首页</el-button></div>
             </div>
           </el-header>
           <hr>

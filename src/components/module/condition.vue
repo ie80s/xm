@@ -113,7 +113,7 @@ export default {
 
 .conrepair{
     border: 1px solid black;
-    height: 40%;
+    height: 20%;
     border-top-width:0px;
     border-left-width:0px;
     border-right-width:0px;

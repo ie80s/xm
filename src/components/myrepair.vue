@@ -1,5 +1,8 @@
 <template>
+   
     <div id="repair">
+        <ttitle></ttitle>
+        <div class="titrap">
         <div class="mine">
             <div class="mine-re-1">
                 <i class="el-icon-notebook-2"></i>
@@ -17,11 +20,11 @@
                 </div>
                  
             </div>
+        
             <hr size="1px" noshade="true">
-
             <condition></condition>
         </div>
-        
+        </div>
     </div>
 </template>
 
@@ -30,7 +33,7 @@
 
 <script>
 import condition from '@/components/module/condition'
-
+import ttitle from '@/components/common/ttitle'
 
 export default {
     data(){
@@ -39,7 +42,8 @@ export default {
         };
     },
     components: {
-        condition
+        condition,
+        ttitle
     }
 }
 
@@ -78,11 +82,16 @@ i{
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
-        .mine{
+    flex-direction: column;
+        .titrap{
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+            flex-direction: row;
+            .mine{
             width: 15%;
             height: 735px;
-            border: 1px solid black;
+            
             margin-left: 15%;
             display: inline-flex;
             flex-direction: column;
@@ -120,6 +129,8 @@ i{
             }
         }
 
+        }
+        
 }
 
 
